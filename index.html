@@ -1,297 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ukubona</title>
-<!-- Fallback favicon (used if browser doesn't support media queries) -->
-<link rel="icon" href="https://abikesa.github.io/favicon/favicon-light.ico" type="image/x-icon" />
+  <meta name="description" content="Ukusoma: A sensual and symbolic grammar of ritual intimacy beyond commodification or protest." />
+  <meta name="theme-color" content="#000000" />
+  <meta name="author" content="Abimereki Muzaale" />    
+  
+  <!-- Fallback favicon (used if browser doesn't support media queries) -->
+<link rel="icon" href="https://abikesa.github.io/favicon/assets/favicon-light.ico" type="image/x-icon" />
+
 <!-- Favicon for light mode -->
-<link rel="icon" href="https://abikesa.github.io/favicon/favicon-light.ico" type="image/x-icon" media="(prefers-color-scheme: light)" />
+<link rel="icon" href="https://abikesa.github.io/favicon/assets/favicon-light.ico" type="image/x-icon" media="(prefers-color-scheme: light)" />
+
 <!-- Favicon for dark mode -->
-<link rel="icon" href="https://abikesa.github.io/favicon/favicon-dark.ico" type="image/x-icon" media="(prefers-color-scheme: dark)" />
-  <!-- Preload Logo Assets -->
-  <link rel="preload" href="https://abikesa.github.io/logos/ukubona-light-fixed.png" as="image" />
-  <link rel="preload" href="https://abikesa.github.io/logos/ukubona-dark-fixed.png" as="image" />
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+<link rel="icon" href="https://abikesa.github.io/favicon/assets/favicon-dark.ico" type="image/x-icon" media="(prefers-color-scheme: dark)" />
+
+<!-- Preload Logo Assets -->
+<link rel="preload" href="https://abikesa.github.io/logos/ukubona-light.png" as="image" />
+<link rel="preload" href="https://abikesa.github.io/logos/ukubona-dark.png" as="image" />
+   
+  <title>Ukusoma</title>
   <style>
-    :root {
-      --bg-light: #ffffff;
-      --bg-dark: #000000;
-    }
-
-    html[data-theme='light'] {
-      background-color: var(--bg-light);
-    }
-
-    html[data-theme='dark'] {
-      background-color: var(--bg-dark);
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      width: 100%;
-      font-family: 'Inter', system-ui, sans-serif;
-    }
-
-    html[data-theme='light'] .menu-icon div {
+    body {
       background-color: #000;
-    }
-
-    html[data-theme='dark'] .menu-icon div {
-      background-color: #fff;
+      color: #000; /* This makes text invisible on load */
     }
 
     body {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      opacity: 0;
-      animation: fadeIn 0.8s ease-in-out forwards;
+      background-color: #000;
+      color: #222; /* Just enough to differentiate from #000 but still "hidden" */
     }
-
-    @keyframes fadeIn {
-      to { opacity: 1; }
+    
+    .tap-reveal:hover {
+      opacity: 0.9;
     }
-
-    .logo-center {
-      width: 220px;
-      height: 220px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .logo-center img {
-      width: 100%;
-      height: 100%;
-      display: block;
-      object-fit: contain;
-      image-rendering: auto;
-      transform-origin: center center;
-    }
-
-    @keyframes spin {
-      from { transform: scale(1) rotate(0deg); }
-      to   { transform: scale(1) rotate(360deg); }
-    }
-
-    @keyframes spin-light {
-      from { transform: translate(-3px, 16px) scale(0.92) rotate(0deg); }
-      to   { transform: translate(-3px, 16px) scale(0.92) rotate(360deg); }
-    }
-
-    #logo {
-     animation: spin 60s linear infinite;
-     transition: opacity 0.4s ease-in;
-     opacity: 0;
-    }
-
-    body.loaded #logo {
-      opacity: 1;
-    }
-
-
-    #logo.light-mode-fix {
-      animation: spin-light 60s linear infinite !important;
-    }
-
-    .top-left, .top-right {
-      position: absolute;
-      top: 1em;
-      z-index: 999;
-    }
-
-    .top-left {
-      left: 1em;
-    }
-
-    .top-right {
-      right: 1em;
-    }
-
-    .menu-icon, #toggle-theme {
+    .tap-reveal {
       cursor: pointer;
-      background: transparent;
-      border: none;
-      font-size: 1.5rem;
+    }
+    
+    body {
+      background-color: #000;
+      color: #000;
+      font-family: 'Georgia', serif;
+      padding: 60px;
+      line-height: 1.8;
     }
 
-    .menu-icon {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
-      width: 32px;
-      height: 32px;
+    .tap-reveal p {
+      transition: color 5.5s ease;
+      color: #000;
+      margin-bottom: 1.5em;
+      cursor: default;
     }
 
-    .menu-icon div {
-      width: 8px;
-      height: 8px;
-      border-radius: 1px;
+    .tap-reveal.show p {
+      color: #ddd;
     }
 
-    .app-grid {
-      position: absolute;
-      top: 4rem;
-      left: 1em;
-      display: none;
-      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-      gap: 1rem;
-      background: rgba(255, 255, 255, 0.95);
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      padding: 1rem;
-      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
-      max-height: 80vh;
-      overflow-y: auto;
-      width: 90vw;
-      max-width: 1000px;
-      z-index: 998;
-    }
-
-    html[data-theme='dark'] .app-grid {
-      background: rgba(0, 0, 0, 0.95);
-      color: #eee;
-    }
-
-    .app-grid a {
-      text-decoration: none;
-      color: inherit;
-      font-size: 0.85rem;
-      font-weight: 500;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 0.4rem;
-      border-radius: 6px;
-      transition: background-color 0.2s, transform 0.3s;
-      opacity: 0;
-      animation: fadeTile 0.5s ease forwards;
-    }
-
-    @keyframes fadeTile {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .icon-box {
-      font-size: 1.4rem;
-      width: 48px;
-      height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 0.5rem;
+    footer {
+      text-align: center;
+      margin-top: 80px;
+      font-variant: small-caps;
+      font-size: 0.8rem;
+      color: #444;
+      letter-spacing: 2px;
     }
   </style>
+  <noscript>
+    <style>
+      .tap-reveal p {
+        color: #ccc;
+      }
+    </style>
+    <div class="tap-reveal"><p>JavaScript is required to interact with this page meaningfully.</p></div>
+  </noscript>
+  
 </head>
 <body>
-  <div class="top-left">
-    <div class="menu-icon" id="gridToggle" role="button" aria-label="Open navigation menu" tabindex="0">
-      <div></div><div></div><div></div>
-      <div></div><div></div><div></div>
-      <div></div><div></div><div></div>
-    </div>
-  </div> <!-- <- This was missing -->
-  
-  <div class="top-right">
-    <button id="toggle-theme">🌞 / 🌙</button>
+
+  <div class="tap-reveal" onclick="this.classList.toggle('show')">
+    <p>There comes a point when the arc of liberation begins to feel too much like a marketplace. The skin once unveiled in defiance now gleams in ads for high heels, lingerie, Pepsi, and power. The body that once screamed “freedom” has been photoshopped, looped, and remixed until it no longer startles, no longer even suggests mystery. The undressed form is now <em>just content</em>, swallowed up by an infinite <a href="https://en.wikipedia.org/wiki/Favicon">scroll</a>. For the eyes of the Lord run to and fro throughout the whole earth, to shew himself strong in the behalf of them whose heart is perfect toward him. Herein thou hast done foolishly: therefore from henceforth thou shalt have wars.</p>
   </div>
 
-  <div class="logo-center">
-<img
-  src="https://abikesa.github.io/logos/ukubona-light-fixed.png"
-  alt="Ukubona Logo"
-  id="logo"
-  loading="eager"
-/>
+  <div class="tap-reveal" onclick="this.classList.toggle('show')">
+    <p>And then—out of nowhere, and with exquisite stillness—comes a shift. A return. Not to modesty, but to something far more provocative: <strong>intimacy</strong>. And not just intimacy, but <em>symbolic rehearsal</em>. A gesture toward sensuality that dares <em>not</em> to complete itself. This is where we enter the logic of <strong>Ukusoma</strong>—a concept far too slippery for Western feminism, too sacred for capitalism, and too charged to be properly explained in any academic text. It is the <em>ritual of the not-yet</em>, the sacred pause before consummation, the subversive <a href="kitabo/ensi/myhtml/self.html">art</a> of <em>withheld knowing</em>.</p>
   </div>
 
-  <div class="app-grid" id="gridMenu"></div>
+  <div class="tap-reveal" onclick="this.classList.toggle('show')">
+    <p>We have followed the arc. Ella Fitzgerald gave us voice without body. Josephine Baker, body as satire. Madonna, body as liturgy. Britney and Xtina, body as product. Beyoncé and Rihanna, body as billion-dollar business. Cardi B and Doja Cat, body as meme, <a href="https://abikesa.github.io/wild-e/index.html">weapon</a>, and glitch.</p>
+  </div>
 
-  <script>
-    const html = document.documentElement;
-    const toggleBtn = document.getElementById('toggle-theme');
-    const logo = document.getElementById('logo');
+  <div class="tap-reveal" onclick="this.classList.toggle('show')">
+    <p>Then came two figures who seemed like reversals but were actually <strong>keys</strong>: <strong>Billie Eilish</strong> and <strong>H.E.R.</strong> They cloaked themselves, filtered the gaze, and demanded that we listen before we look. We celebrated them, rightly, as priestesses of filtration, as Athena-coded signal-makers in a world of Dionysian blur. But now—especially in the case of H.E.R.—something is happening. The hoodie slips. Not because of pressure, not because of marketing, but because <em>she chooses to let it slip</em>. Because <em>she is no longer 10-year-old Gabby Wilson</em>—she is a woman in full possession of her <a href="./1-nonself.html" target="_self">evolution</a>
+    </p>
+  </div>
 
-    const LIGHT_LOGO = 'https://abikesa.github.io/logos/ukubona-light-fixed.png';
-    const DARK_LOGO  = 'https://abikesa.github.io/logos/ukubona-dark-fixed.png';
+  <div class="tap-reveal" onclick="this.classList.toggle('show')">
+    <p>And so we arrive at a space that feminism—both ancient and modern—has struggled to name: a sensuality <strong>not born from coercion</strong>, but <strong>not interested in capital either</strong>. A sensuality that does not demand to be seen, but that <em>invites one to come closer, privately, with consent, in trust</em>. We are no longer in the terrain of “liberation” or “empowerment” or “smashing the patriarchy.” We are in the <a href="./2-self.html">realm</a> of <strong>Ukusoma</strong>.</p>
+  </div>
 
-    function setTheme(theme) {
-      html.setAttribute('data-theme', theme);
-      localStorage.setItem('theme', theme);
-      logo.src = theme === 'dark' ? DARK_LOGO : LIGHT_LOGO;
-      toggleBtn.textContent = theme === 'dark' ? '🌙' : '🌞';
-      if (theme === 'light') {
-        logo.classList.add('light-mode-fix');
-      } else {
-        logo.classList.remove('light-mode-fix');
-      }
-    }
+  <div class="tap-reveal" onclick="this.classList.toggle('show')">
+    <p>In Zulu, <em>ukusoma</em> refers to non-penetrative sexual intimacy—often culturally sanctioned, bound by consent, and ritually understood as a way to express desire without “breaking” anything. It is not abstinence. It is <em>rehearsal</em>. It is not sexlessness. It is the <strong>simulation of sensual agency</strong>—not for an audience, not for applause, but for the participants. It must be consensual, or it becomes unthinkable. The entire power of this space lies in the fact that it is chosen. It is not adolescence. It is not delay out of immaturity. It is <strong>mature ritual withholding</strong>—<em>Eden <a href="./3-reframe.html">after</a> consciousness</em>, not before it.</p>
+  </div>
 
-    const storedTheme = localStorage.getItem('theme') || 'dark';
-    setTheme(storedTheme);
+  <div class="tap-reveal" onclick="this.classList.toggle('show')">
+    <p>This is what <em>Ukusoma</em> offers: a <strong>syntax of desire</strong> rooted in agency, not commodification. A moment of sensual meaning that <em>refuses to cash in</em>. There are no billions to be made from it. No Super Bowl deals. No thirst-trap metrics. It’s not designed for the masses. It’s designed for the <a href="./4-boundaries.html">myth</a>.</p>
+  </div>
 
-    toggleBtn.addEventListener('click', () => {
-      const newTheme = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      setTheme(newTheme);
-    });
+  <div class="tap-reveal" onclick="this.classList.toggle('show')">
+    <p>H.E.R., in this reading, becomes a <strong>high priestess of sacred delay</strong>. Her artistry is now beyond protest. It is invitation, rehearsal, tease, offering—but all encrypted. And Billie Eilish, once the queen of the anti-gaze, is now experimenting with <em>what happens when the gaze returns</em>—but this time, on her terms. In both cases, the shift is not regression. It is <strong>recursion</strong>. A <a href="./5-authorship.html">spiral</a>, not a step back.</p>
+  </div>
 
-    const toggle = document.getElementById('gridToggle');
-    const menu = document.getElementById('gridMenu');
+  <div class="tap-reveal" onclick="this.classList.toggle('show')">
+    <p>The feminists will not understand this, not fully. Because it cannot be litigated. It cannot be tweeted. It cannot be packaged into a political campaign. It is too intimate. Too ambiguous. Too spiritual.</p>
+  </div>
 
-    toggle.addEventListener('click', () => {
-      menu.style.display = menu.style.display === 'grid' ? 'none' : 'grid';
-    });
+  <div class="tap-reveal" onclick="this.classList.toggle('show')">
+    <p>So let the others chase virality. Let them monetize liberation. Let them misinterpret what power looks like. Meanwhile, Billie and H.E.R. will rehearse it—delicately, symbolically, one lyric at a time.</p>
+  </div>
 
-    toggle.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        toggle.click();
-      }
-    });     
-    
-    document.addEventListener('click', (e) => {
-      if (!menu.contains(e.target) && !toggle.contains(e.target)) {
-        menu.style.display = 'none';
-      }
-    });
+  <div class="tap-reveal" onclick="this.classList.toggle('show')">
+    <p>Because sometimes the most radical thing a woman can do… is <em>almost</em> undress. <br>…and then not.</p>
+  </div>
 
-    window.addEventListener('load', () => {
-      document.body.classList.add('loaded');
-    });
+  <footer>UKUSOMA</footer>
 
-
-    const links = [
-      { name: 'Nonself', url: 'https://abikesa.github.io/wiki-html/mythology.html', icon: '🌊' },
-      { name: 'Self', url: 'https://abikesa.github.io/wild-e/index.html', icon: '🚢' },
-      { name: 'Reframe', url: 'https://abikesa.github.io/gpt-wiki/surgeons-cut.html', icon: '🪛 🏴‍☠️' },
-      { name: 'Boundaries', url: 'https://abikesa.github.io/pretty-girl-rock/pretty-hott.html', icon: '🦈 ✂️ 🛟' },
-      { name: 'Authorship', url: 'https://abikesa.github.io/plant-flag/risk.html', icon: '🏝️' },
-    ];
-
-    links.forEach((link, i) => {
-      const a = document.createElement('a');
-      a.href = link.url;
-      a.target = '_blank';
-      a.style.animationDelay = `${i * 0.03}s`;
-
-      const icon = document.createElement('div');
-      icon.textContent = link.icon;
-      icon.className = 'icon-box';
-      a.appendChild(icon);
-      a.appendChild(document.createTextNode(link.name));
-      menu.appendChild(a);
-    });
-  </script>
 </body>
 </html>
